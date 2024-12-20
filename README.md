@@ -10,6 +10,7 @@ React (with TypeScript): Chosen for its type safety, which enhances the developm
 GraphQL & Apollo Client: Used to fetch and manage data more efficiently, offering declarative queries and streamlined state management.
 
 🚀 Features
+
 GraphQL Integration: Fully functional schema with queries and resolvers to handle data fetching.
 Apollo Client: Simplifies data handling and state management.
 Filtering and Sorting: Real-time adjustments based on user preferences.
@@ -18,3 +19,8 @@ Pagination: Efficient navigation across multiple pages of data.
 Infinite Scroll Rendering: Dynamic loading of content as the user scrolls.
 
 ⚙️ Setting Up the Application
+
+1. Open (rick_morty_pabau) Folder, in terminal
+2. Run Command (npm i).
+3. Run Command (npm run dev).
+4. Open the localhost URL.

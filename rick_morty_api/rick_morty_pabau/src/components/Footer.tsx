@@ -1,12 +1,7 @@
-import { useEffect } from "react";
 import { useLanguageContext } from "../context/LanguageContext";
-import lang from "../translation/translate";
 
 function Footer() {
   const { langState, toggleLangState } = useLanguageContext();
-  useEffect(() => {
-    console.log(lang[langState]);
-  }, [langState]);
 
   return (
     <footer>
