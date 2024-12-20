@@ -13,16 +13,19 @@ function DropDownFilter({
   setFilterTypeStatus,
   setFilterTypeSpecies,
 }: FilterProps) {
+  //adding the context for the language to be used
   const { langState } = useLanguageContext();
 
+  //setting the filter for the status
   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value === "All" ? null : event.target.value;
-    setFilterTypeStatus(value); // Update status with the selected value
+    setFilterTypeStatus(value);
   };
 
+  //setting the filter for the species
   const handleSpeciesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value === "All" ? null : event.target.value;
-    setFilterTypeSpecies(value); // Update species with the selected value
+    setFilterTypeSpecies(value);
   };
 
   return (

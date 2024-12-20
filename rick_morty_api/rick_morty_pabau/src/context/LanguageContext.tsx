@@ -1,32 +1,31 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Define the context type
+// creating props to be able to make context
 interface LanguageContextType {
-  langState: number; // 0 or 1
+  langState: number;
   toggleLangState: () => void;
 }
 interface ProviderProps {
   children: React.ReactElement;
 }
 
-// Create the context with a default value (we'll update this later)
+//context created
 const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
 );
 
-// Create a provider component to wrap your app
 export function LanguageProvider({ children }: ProviderProps) {
   const [langState, setLangState] = useState<number>(0);
 
-  // Load from localStorage if present
   useEffect(() => {
+    //checking to see if we have a set language from before
     const savedLangState = localStorage.getItem("langState");
     if (savedLangState) {
       setLangState(parseInt(savedLangState, 10));
     }
   }, []);
 
-  // Toggle between 0 and 1, and persist in localStorage
+  // Updates the langState in the component, and stores the new value in localStorage to persist the language preference across page reloads or sessions
   const toggleLangState = () => {
     const newLangState = langState === 0 ? 1 : 0;
     setLangState(newLangState);
@@ -40,7 +39,7 @@ export function LanguageProvider({ children }: ProviderProps) {
   );
 }
 
-// Create a custom hook to use the context
+//will throw error if not used properly
 export const useLanguageContext = (): LanguageContextType => {
   const context = useContext(LanguageContext);
   if (!context) {

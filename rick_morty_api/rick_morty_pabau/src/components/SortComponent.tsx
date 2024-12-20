@@ -6,11 +6,15 @@ interface SortProps {
 }
 
 function SortComponent({ sortByFuc }: SortProps) {
+  //adding language context for use
   const { langState } = useLanguageContext();
+
+  //setting the sort feature
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value === "None" ? null : event.target.value;
     sortByFuc(value);
   };
+
   return (
     <div>
       <label htmlFor="sortBy-filter">Sort By:</label>
