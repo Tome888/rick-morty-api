@@ -10,7 +10,7 @@ function PagiBtns({
 }: PagiProps) {
   const { langState } = useLanguageContext();
   return (
-    <div>
+    <div className="pagiWrapper">
       <button onClick={() => setPageNum(pageNum - 1)} disabled={!isPrevActive}>
         ←
       </button>

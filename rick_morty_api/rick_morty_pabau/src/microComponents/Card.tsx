@@ -4,16 +4,18 @@ import CardInfo from "../Types/CardsType";
 
 function Card({ id, name, status, species, gender, origin }: CardInfo) {
   const { langState } = useLanguageContext();
+  const boxShadowFunc = (sp: string) => {
+    if (sp === "Human" || sp === "Humanoid") {
+      return "humanShadow";
+    } else if (sp === "Alien") {
+      return "alienShadow";
+    } else {
+      return "unknownShadow";
+    }
+  };
+
   return (
-    <div
-      key={id}
-      style={{
-        border: "1px solid #ccc",
-        padding: "1rem",
-        borderRadius: "8px",
-        width: "200px",
-      }}
-    >
+    <div key={id} className={`cardWrapper ${boxShadowFunc(species)}`}>
       <h2>{name}</h2>
       <p>
         <strong>{lang[langState].translations.statusFilter}: </strong>

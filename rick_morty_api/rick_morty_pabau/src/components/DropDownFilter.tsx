@@ -26,7 +26,7 @@ function DropDownFilter({
   };
 
   return (
-    <div>
+    <div className="filterWrapper">
       <div>
         <label htmlFor="status-filter">
           {lang[langState].translations.statusFilter}:

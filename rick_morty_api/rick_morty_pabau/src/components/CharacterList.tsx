@@ -16,7 +16,7 @@ interface CardInfo {
 }
 
 interface QueryType {
-  query: any;
+  // query: any;
   pageNumber: number;
   setNumberPage: (pageNumber: number) => void;
   setNext: (value: boolean) => void;
@@ -29,7 +29,7 @@ interface QueryType {
 }
 
 function CharacterList({
-  query,
+  // query,
   pageNumber,
   setNumberPage,
   setNext,
@@ -40,10 +40,30 @@ function CharacterList({
   isNextPage,
   isPrevPage,
 }: QueryType) {
+  const GET_CHARACTERS_FILTER = gql`
+    query GetFilteredCharacters($page: Int, $status: String, $species: String) {
+      characters(page: $page, filter: { status: $status, species: $species }) {
+        results {
+          id
+          name
+          status
+          species
+          gender
+          origin {
+            name
+          }
+        }
+        info {
+          next
+          prev
+        }
+      }
+    }
+  `;
   const [arrSort, setArrSort] = useState<CardInfo[]>([]);
   const [lastScroll, setLastScroll] = useState("bottom");
 
-  const { loading, error, data } = useQuery(query, {
+  const { loading, error, data } = useQuery(GET_CHARACTERS_FILTER, {
     variables: {
       page: pageNumber,
       status: status || undefined, // Pass undefined if no filter is set
@@ -53,17 +73,6 @@ function CharacterList({
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // const div = divRef.current;
-    // if (div) {
-    //   if (lastScroll === "bottom") {
-    //     const scrollToPosition = div.scrollHeight * 0.02;
-    //     div.scrollTop = scrollToPosition;
-    //   } else {
-    //     const scrollToPosition = div.scrollHeight * 0.98;
-    //     div.scrollTop = scrollToPosition;
-    //   }
-    // }
-
     const div = divRef.current;
     if (div) {
       if (lastScroll === "bottom") {
@@ -93,28 +102,6 @@ function CharacterList({
       console.log(arrSort);
     }
   }, [data, setPrev, setNext, sortBy, lastScroll]);
-
-  // const handleScroll = () => {
-  //   const div = divRef.current;
-
-  //   if (div) {
-  //     const isAtBottom = div.scrollHeight - div.scrollTop === div.clientHeight;
-  //     const isAtTop = div.scrollTop === 0;
-  //     if (isAtBottom) {
-  //       if (isNextPage) {
-  //         setNumberPage(pageNumber + 1);
-  //         setLastScroll("bottom");
-  //       }
-  //     }
-
-  //     if (isAtTop) {
-  //       if (isPrevPage) {
-  //         setNumberPage(pageNumber - 1);
-  //         setLastScroll("top");
-  //       }
-  //     }
-  //   }
-  // };
 
   const handleScroll = () => {
     const div = divRef.current;
@@ -146,7 +133,7 @@ function CharacterList({
     <div
       ref={divRef}
       className="wrapperCards"
-      style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}
+      // style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}
       onScroll={handleScroll}
     >
       {!sortBy &&
