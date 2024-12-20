@@ -24,7 +24,16 @@ img {
 }
 
 .wrapperCards {
-  width: 90%;
+  width: 60%;
   height: 70vh;
   overflow-y: scroll;
+  padding-left: 6rem;
+  padding-right: 6rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+.activeLang {
+  font-weight: bold;
+  color: red;
 }

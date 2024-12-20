@@ -5,6 +5,9 @@ import PagiBtns from "./microComponents/PagiBtns";
 import { gql } from "@apollo/client";
 import DropDownFilter from "./components/DropDownFilter";
 import SortComponent from "./components/SortComponent";
+import Footer from "./components/Footer";
+import { useLanguageContext } from "./context/LanguageContext";
+import lang from "./translation/translate";
 
 const GET_CHARACTERS_FILTER = gql`
   query GetFilteredCharacters($page: Int, $status: String, $species: String) {
@@ -37,40 +40,15 @@ function App() {
 
   const [sort, setSort] = useState<string | null>(null);
 
-  const [lang, setLang] = useState("en");
+  const { langState } = useLanguageContext();
 
   useEffect(() => {
     setPageNum(1);
-    
   }, [status, species, sort]);
 
   return (
-    // <>
-    //   <h1>Rick and Morty Characters</h1>
-    //   <DropDownFilter
-    //     setFilterTypeStatus={setStatus}
-    //     setFilterTypeSpecies={setSpecies}
-    //   />
-    //   <SortComponent sortByFuc={setSort} />
-    //   <CharacterList
-    //     query={GET_CHARACTERS_FILTER}
-    //     pageNumber={pageNum}
-    //     setNext={setNextActive}
-    //     setPrev={setPrevActive}
-    //     status={status}
-    //     species={species}
-    //     sortBy={sort}
-    //   />
-    //   <PagiBtns
-    //     pageNum={pageNum}
-    //     setPageNum={setPageNum}
-    //     isNextActive={nextActive}
-    //     isPrevActive={prevActive}
-    //   />
-    //   <footer></footer>
-    // </>
     <main>
-      <h1>Rick and Morty Characters</h1>
+      <h1>Rick and Morty {lang[langState].translations.characters}</h1>
       <DropDownFilter
         setFilterTypeStatus={setStatus}
         setFilterTypeSpecies={setSpecies}
@@ -84,6 +62,9 @@ function App() {
         status={status}
         species={species}
         sortBy={sort}
+        setNumberPage={setPageNum}
+        isNextPage={nextActive}
+        isPrevPage={prevActive}
       />
       <PagiBtns
         pageNum={pageNum}
@@ -91,9 +72,7 @@ function App() {
         isNextActive={nextActive}
         isPrevActive={prevActive}
       />
-      <footer>
-        <button></button>
-      </footer>
+      <Footer />
     </main>
   );
 }

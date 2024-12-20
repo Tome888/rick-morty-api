@@ -1,3 +1,5 @@
+import { useLanguageContext } from "../context/LanguageContext";
+import lang from "../translation/translate";
 import PagiProps from "../Types/PagiType";
 
 function PagiBtns({
@@ -6,14 +8,17 @@ function PagiBtns({
   isNextActive,
   isPrevActive,
 }: PagiProps) {
+  const { langState } = useLanguageContext();
   return (
     <div>
       <button onClick={() => setPageNum(pageNum - 1)} disabled={!isPrevActive}>
-        prev
+        ←
       </button>
-      <h3>Page {pageNum}</h3>
+      <h3>
+        {lang[langState].translations.pageNumber} {pageNum}
+      </h3>
       <button onClick={() => setPageNum(pageNum + 1)} disabled={!isNextActive}>
-        next
+        →
       </button>
     </div>
   );

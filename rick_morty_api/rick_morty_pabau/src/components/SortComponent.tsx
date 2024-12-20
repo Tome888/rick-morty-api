@@ -1,8 +1,12 @@
+import { useLanguageContext } from "../context/LanguageContext";
+import lang from "../translation/translate";
+
 interface SortProps {
   sortByFuc: (sortType: string | null) => void;
 }
 
 function SortComponent({ sortByFuc }: SortProps) {
+  const { langState } = useLanguageContext();
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value === "None" ? null : event.target.value;
     sortByFuc(value);
@@ -11,10 +15,9 @@ function SortComponent({ sortByFuc }: SortProps) {
     <div>
       <label htmlFor="sortBy-filter">Sort By:</label>
       <select onChange={handleSortChange}>
-        //the fucntion should be here
-        <option value="None">None</option>
+        <option value="None">{lang[langState].translations.none}</option>
         <option value="Name">Name</option>
-        <option value="Origin">Origin</option>
+        <option value="Origin">{lang[langState].translations.origin}</option>
       </select>
     </div>
   );

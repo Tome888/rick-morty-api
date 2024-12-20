@@ -1,6 +1,9 @@
+import { useLanguageContext } from "../context/LanguageContext";
+import lang from "../translation/translate";
 import CardInfo from "../Types/CardsType";
 
 function Card({ id, name, status, species, gender, origin }: CardInfo) {
+  const { langState } = useLanguageContext();
   return (
     <div
       key={id}
@@ -13,16 +16,18 @@ function Card({ id, name, status, species, gender, origin }: CardInfo) {
     >
       <h2>{name}</h2>
       <p>
-        <strong>Status:</strong> {status}
+        <strong>{lang[langState].translations.statusFilter}: </strong>
+        {status}
       </p>
       <p>
-        <strong>Species:</strong> {species}
+        <strong>{lang[langState].translations.speciesFilter}: </strong>
+        {species}
       </p>
       <p>
-        <strong>Gender:</strong> {gender}
+        <strong>{lang[langState].translations.gender}: </strong> {gender}
       </p>
       <p>
-        <strong>Origin:</strong> {origin.name}
+        <strong>{lang[langState].translations.origin}: </strong> {origin.name}
       </p>
     </div>
   );

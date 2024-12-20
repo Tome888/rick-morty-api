@@ -1,3 +1,6 @@
+import { useLanguageContext } from "../context/LanguageContext";
+import lang from "../translation/translate";
+
 interface FilterProps {
   filterTypeStatus?: string | null;
   setFilterTypeStatus: (filterTypeStatus: string | null) => void;
@@ -10,6 +13,8 @@ function DropDownFilter({
   setFilterTypeStatus,
   setFilterTypeSpecies,
 }: FilterProps) {
+  const { langState } = useLanguageContext();
+
   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value === "All" ? null : event.target.value;
     setFilterTypeStatus(value); // Update status with the selected value
@@ -23,20 +28,30 @@ function DropDownFilter({
   return (
     <div>
       <div>
-        <label htmlFor="status-filter">Status</label>
+        <label htmlFor="status-filter">
+          {lang[langState].translations.statusFilter}:
+        </label>
         <select id="status-filter" onChange={handleStatusChange}>
-          <option value="All">All</option>
-          <option value="Alive">Alive</option>
-          <option value="Dead">Dead</option>
-          <option value="Unknown">Unknown</option>
+          <option value="All">{lang[langState].translations.all}</option>
+          <option value="Alive">{lang[langState].translations.alive}</option>
+          <option value="Dead">{lang[langState].translations.dead}</option>
+          <option value="Unknown">
+            {lang[langState].translations.filterUnknown}
+          </option>
         </select>
       </div>
       <div>
-        <label htmlFor="species-filter">Species</label>
+        <label htmlFor="species-filter">
+          {lang[langState].translations.speciesFilter}:
+        </label>
         <select id="species-filter" onChange={handleSpeciesChange}>
-          <option value="All">All</option>
-          <option value="Human">Human</option>
-          <option value="Alien">Alien</option>
+          <option value="All">{lang[langState].translations.all}</option>
+          <option value="Human">
+            {lang[langState].translations.filterHuman}
+          </option>
+          <option value="Alien">
+            {lang[langState].translations.filterAlien}
+          </option>
         </select>
       </div>
     </div>
