@@ -4,12 +4,8 @@
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 2rem;
 }
-
 h1,
 h2,
 h3,
@@ -29,13 +25,16 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .wrapperCards {
-  width: 60%;
+  /* width: 60%; */
+  width: 1500px;
+
   height: 70vh;
   overflow-y: scroll;
-  padding-left: 8rem;
+  padding-left: 14rem;
   padding-right: 6rem;
   padding-top: 10rem;
   padding-bottom: 10rem;
@@ -60,7 +59,7 @@ main {
 footer {
   padding: 2rem;
   background-color: #363636;
-  width: 100%;
+  width: 100% !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +80,8 @@ footer > p:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
+  /* width: 60%; */
+  width: 1500px;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -134,7 +134,8 @@ strong {
 }
 
 .cloneWrapper {
-  width: 1000px;
+  width: 1500px;
+  /* max-width: 100vw; */
   display: flex;
   align-items: center;
   justify-content: center;
